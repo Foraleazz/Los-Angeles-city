@@ -409,4 +409,161 @@ are important reasons.
 <p>
 Projectprüfung Klasse 8 - American City Profile
     By Foraleazz
-    
+    <!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bewertungen</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#fff3e0;
+}
+
+.container{
+    max-width:600px;
+    margin:40px auto;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+h1{
+    text-align:center;
+    color:#ff6f00;
+}
+
+p{
+    text-align:center;
+    color:#666;
+}
+
+input,textarea{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:2px solid #ffb74d;
+    border-radius:10px;
+    box-sizing:border-box;
+}
+
+textarea{
+    height:120px;
+    resize:none;
+}
+
+.stars{
+    display:flex;
+    justify-content:center;
+    flex-direction:row-reverse;
+    margin:15px 0;
+}
+
+.stars input{
+    display:none;
+}
+
+.stars label{
+    font-size:35px;
+    color:#ccc;
+    cursor:pointer;
+}
+
+.stars input:checked ~ label,
+.stars label:hover,
+.stars label:hover ~ label{
+    color:#ff9800;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#ff9800;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#f57c00;
+}
+
+.review{
+    margin-top:20px;
+    padding:15px;
+    background:#fff8e1;
+    border-left:5px solid #ff9800;
+    border-radius:10px;
+}
+
+.rating{
+    color:#ff9800;
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Bewertung schreiben</h1>
+<p>Wir freuen uns auf Ihr Feedback!</p>
+
+<input id="name" type="text" placeholder="Ihr Name">
+
+<div class="stars">
+<input type="radio" id="s5" name="rating" value="5"><label for="s5">★</label>
+<input type="radio" id="s4" name="rating" value="4"><label for="s4">★</label>
+<input type="radio" id="s3" name="rating" value="3"><label for="s3">★</label>
+<input type="radio" id="s2" name="rating" value="2"><label for="s2">★</label>
+<input type="radio" id="s1" name="rating" value="1"><label for="s1">★</label>
+</div>
+
+<textarea id="text" placeholder="Ihre Bewertung..."></textarea>
+
+<button onclick="addReview()">Bewertung absenden</button>
+
+<div id="reviews"></div>
+
+</div>
+
+<script>
+function addReview(){
+
+const name=document.getElementById("name").value;
+const text=document.getElementById("text").value;
+const rating=document.querySelector("input[name=rating]:checked");
+
+if(!name || !text || !rating){
+alert("Bitte alle Felder ausfüllen.");
+return;
+}
+
+let stars="";
+for(let i=0;i<rating.value;i++){
+stars+="★";
+}
+
+document.getElementById("reviews").innerHTML=
+`<div class="review">
+<h3>${name}</h3>
+<div class="rating">${stars}</div>
+<p>${text}</p>
+</div>` + document.getElementById("reviews").innerHTML;
+
+document.getElementById("name").value="";
+document.getElementById("text").value="";
+document.querySelectorAll("input[name=rating]").forEach(e=>e.checked=false);
+
+}
+</script>
+
+</body>
+</html>
